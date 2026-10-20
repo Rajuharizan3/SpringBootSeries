@@ -25,8 +25,8 @@ public class StudentController {
                 .body(studentService.createStudent(student));
     }
 
-    @GetMapping("/get/{id}")
-    public ResponseEntity<Student> getStudentById(@PathVariable Long id){
+    @GetMapping("/get")
+    public ResponseEntity<Student> getStudentById(@RequestParam Long id){
         Student studentResponse = studentService.getStudent(id);
 
         if(studentResponse == null){
@@ -46,8 +46,8 @@ public class StudentController {
         return ResponseEntity.status(HttpStatus.OK).body(studentList);
     }
 
-    @PutMapping("/update/{id}")
-    public ResponseEntity<Student> updateStudentById(@PathVariable Long id,
+    @PutMapping("/update")
+    public ResponseEntity<Student> updateStudentById(@RequestParam Long id,
                                                      @RequestBody Student studentRequest){
         Student updatedStudent =
                 studentService.updateStudent(id, studentRequest);
@@ -59,8 +59,8 @@ public class StudentController {
         return ResponseEntity.ok(updatedStudent);
     }
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<String> deleteStudent(@PathVariable Long id){
+    @DeleteMapping("/delete")
+    public ResponseEntity<String> deleteStudent(@RequestParam Long id){
         Boolean isDeleted = studentService.deleteById(id);
 
         if(!isDeleted){
@@ -74,6 +74,25 @@ public class StudentController {
     public void deleteAllRecords(){
         studentService.deleteAllStudent();
     }
+
+    @PostMapping("/bulk-student")
+    public ResponseEntity<List<Student>> createBulkStudents
+            (@RequestBody List<Student> students){
+        List<Student> createStudents = studentService.createBulkStudents(students);
+        return new ResponseEntity<>(createStudents, HttpStatus.CREATED);
+    }
+
+    @PatchMapping("/delete-softly")
+    public ResponseEntity<String> deleteSoftly(@RequestParam Long id){
+        Boolean isDeleted = studentService.deleteSoftlyById(id);
+
+        if(!isDeleted){
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok("Student deleted");
+    }
+
 
 
 }
