@@ -87,7 +87,7 @@ public class UserServlet extends HttpServlet {
     public void doPut(HttpServletRequest request,
                       HttpServletResponse response){
         Integer id = Integer.parseInt(request.getParameter("id"));
-        
+
     }
 
     private String userToJson(User user){
