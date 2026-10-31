@@ -10,8 +10,13 @@ import java.util.Optional;
 
 @Repository
 public interface StudentRepository extends JpaRepository<Student, Long> {
+
+    // custom queries provided by spring boot
+
     Optional<Student> findByIdAndDeletedIsFalse(Long id);
 
     List<Student> findByDeletedIsFalse();
+
+    Boolean existsByEmail(String email);
 
 }

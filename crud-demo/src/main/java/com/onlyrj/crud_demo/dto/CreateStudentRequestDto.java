@@ -13,7 +13,7 @@ public class CreateStudentRequestDto {
     private String email;
 
     @NotNull(message = "Age is required")
-    @Min(value = 15, message = "Age must be at least 15 years old")
+    @Min(value = 18, message = "Age must be at least 18 years old")
     private Integer age;
 
     @NotNull(message = "RollNo is required")
