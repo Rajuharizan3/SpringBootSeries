@@ -1,0 +1,18 @@
+npx freellmapi setup-claude --url http://127.0.0.1:31415
+
+BASE_URL=http://127.0.0.1:31415
+API_KEY=freellmapi-e47cad34cffd307f92af614726e1f04502b8e98ceee4fe91
+
+if (!(Test-Path $PROFILE)) { New-Item -ItemType File -Path $PROFILE -Force | Out-Null }Add-Content -Path $PROFILE -Value @'
+function claude-free {  $env:ANTHROPIC_BASE_URL = "http://127.0.0.1:31415"  $env:ANTHROPIC_AUTH_TOKEN = "freellmapi-e47cad34cffd307f92af614726e1f04502b8e98ceee4fe91"  claude @args}'@. $PROFILE
+
+
+if (!(Test-Path $PROFILE)) { New-Item -ItemType File -Path $PROFILE -Force | Out-Null }
+Add-Content -Path $PROFILE -Value @'
+function claude-free {
+    $env:ANTHROPIC_BASE_URL = "http://127.0.0.1:31415"
+    $env:ANTHROPIC_AUTH_TOKEN = "freellmapi-e47cad34cffd307f92af614726e1f04502b8e98ceee4fe91"
+    claude @args
+}
+'@
+. $PROFILE
